@@ -13,7 +13,7 @@ public class Move : MonoBehaviour
     {
         Movement.x = Input.GetAxisRaw("Horizontal");
         Movement.y = Input.GetAxisRaw("Vertical");
-
+        //Transform moviment valor in animation paramenter 
         anim.SetFloat("hori", Movement.x);
         anim.SetFloat("vert", Movement.y);
         anim.SetFloat("Speed", Movement.sqrMagnitude);
@@ -21,7 +21,7 @@ public class Move : MonoBehaviour
 
     void FixedUpdate ()
     {
-        //Movement
+        //Movement of the player
         rb2.MovePosition(rb2.position + Movement * Speed * Time.fixedDeltaTime);
     }
 }
