@@ -5,9 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class StoreDoor : MonoBehaviour
 {
-    public string nomeDaCena;
     public Collider2D coll;
 
+    public Camera First;
+    public Camera Second;
+
+    //public bool MainCam = true;
      void Start()
     {
         //Collider Detection On
@@ -18,7 +21,9 @@ public class StoreDoor : MonoBehaviour
     {
         if(other.CompareTag("Player")){
             
-            SceneManager.LoadScene(nomeDaCena);
+                First.depth = 0;
+                Second.depth = 1;
+              
         }
             
     }

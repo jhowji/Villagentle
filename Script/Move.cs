@@ -14,10 +14,14 @@ public class Move : MonoBehaviour
     public Vector2 backPosition;
     public Animator anim;
     public static Move instance;
-    
+    public GameObject Shop;
+    //Values
+    public bool blueSkin;
+    public bool redSkin;
+    public int Money;
 
     void Start(){
-         
+        
         coll = GetComponent<Collider2D>();
 
         if(instance != null){
@@ -26,11 +30,15 @@ public class Move : MonoBehaviour
         }
         
         instance = this;
-        GameObject.DontDestroyOnLoad(this.gameObject);
+        //GameObject.DontDestroyOnLoad(this.gameObject);
 
     }
     void Update()
     {
+       blueSkin = FindObjectOfType<ChangeSkin>().HasBlue();
+       Debug.Log(Money);
+       redSkin = FindObjectOfType<ChangeSkin>().HasRed();
+        
         Movement.x = Input.GetAxisRaw("Horizontal");
         Movement.y = Input.GetAxisRaw("Vertical");
         //Transform moviment valor in animation paramenter 
@@ -47,10 +55,15 @@ public class Move : MonoBehaviour
     {
         if(other.CompareTag("Respawn")){
             transform.position = startPosition;
+            Shop.SetActive(true);
         }
         else if(other.CompareTag("Finish")){
             transform.position = backPosition;
+            Shop.SetActive(false);
         }
             
+    }
+    public int Pouch(){
+        return Money;
     }
 }
